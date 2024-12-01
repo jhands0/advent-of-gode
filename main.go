@@ -43,6 +43,36 @@ func part1(lines []string) {
 	fmt.Println(totalDistance)
 }
 
+func part2(lines []string) {
+	var left []int
+	var right []int
+
+	for _, line := range lines {
+		parts := strings.Fields(line)
+
+		leftNum, _ := strconv.Atoi(parts[0])
+		rightNum, _ := strconv.Atoi(parts[1])
+
+		left = append(left, leftNum)
+		right = append(right, rightNum)
+
+	}
+
+	rightMap := make(map[int]int)
+
+	for _, num := range right {
+		rightMap[num] += 1
+	}
+
+	similarityScore := 0
+
+	for _, num := range left {
+		similarityScore += num * rightMap[num]
+	}
+
+	fmt.Println(similarityScore)
+}
+
 func main() {
 	input, err := aocutil.NewInputFromFile("session_id")
 	if err != nil {
@@ -55,4 +85,5 @@ func main() {
 	}
 
 	part1(lines)
+	part2(lines)
 }
