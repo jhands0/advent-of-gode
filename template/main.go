@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/echojc/aocutil"
+	aocutil "github.com/echojc/aocutil"
 )
 
 func part1(lines []string) {
