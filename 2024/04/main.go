@@ -40,42 +40,42 @@ func checkForWord(grid []string, row int, col int) int {
 
 	// Up-Right
 	if row >= 3 && col <= (len(grid[0])-1-3) {
-		if grid[row-1][col+1] == byte('M') && grid[row-2][col+2] == byte('A') && grid[row-3][col+3] == byte('S') {
+		if grid[row-1][col+1] == 'M' && grid[row-2][col+2] == 'A' && grid[row-3][col+3] == 'S' {
 			count += 1
 		}
 	}
 
 	// Right
 	if col <= (len(grid[0]) - 1 - 3) {
-		if grid[row][col+1] == byte('M') && grid[row][col+2] == byte('A') && grid[row][col+3] == byte('S') {
+		if grid[row][col+1] == 'M' && grid[row][col+2] == 'A' && grid[row][col+3] == 'S' {
 			count += 1
 		}
 	}
 
 	// Down-Right
 	if row <= (len(grid[0])-1-3) && col <= (len(grid[0])-1-3) {
-		if grid[row+1][col+1] == byte('M') && grid[row+2][col+2] == byte('A') && grid[row+3][col+3] == byte('S') {
+		if grid[row+1][col+1] == 'M' && grid[row+2][col+2] == 'A' && grid[row+3][col+3] == 'S' {
 			count += 1
 		}
 	}
 
 	// Down
 	if row <= (len(grid[0]) - 1 - 3) {
-		if grid[row+1][col] == byte('M') && grid[row+2][col] == byte('A') && grid[row+3][col] == byte('S') {
+		if grid[row+1][col] == 'M' && grid[row+2][col] == 'A' && grid[row+3][col] == 'S' {
 			count += 1
 		}
 	}
 
 	// Down-Left
 	if row <= (len(grid[0])-1-3) && col >= 3 {
-		if grid[row+1][col-1] == byte('M') && grid[row+2][col-2] == byte('A') && grid[row+3][col-3] == byte('S') {
+		if grid[row+1][col-1] == 'M' && grid[row+2][col-2] == 'A' && grid[row+3][col-3] == 'S' {
 			count += 1
 		}
 	}
 
 	// Left
 	if col >= 3 {
-		if grid[row][col-1] == byte('M') && grid[row][col-2] == byte('A') && grid[row][col-3] == byte('S') {
+		if grid[row][col-1] == 'M' && grid[row][col-2] == 'A' && grid[row][col-3] == 'S' {
 			count += 1
 		}
 	}
@@ -107,28 +107,28 @@ func checkForCross(grid []string, row int, col int) int {
 	// M.M
 	// .A.
 	// S.S
-	if grid[row-1][col-1] == byte('M') && grid[row-1][col+1] == byte('M') && grid[row+1][col+1] == 'S' && grid[row+1][col-1] == byte('S') {
+	if grid[row-1][col-1] == 'M' && grid[row-1][col+1] == 'M' && grid[row+1][col+1] == 'S' && grid[row+1][col-1] == 'S' {
 		count += 1
 	}
 
 	// S.M
 	// .A.
 	// S.M
-	if grid[row-1][col-1] == byte('S') && grid[row-1][col+1] == byte('M') && grid[row+1][col+1] == byte('M') && grid[row+1][col-1] == byte('S') {
+	if grid[row-1][col-1] == 'S' && grid[row-1][col+1] == 'M' && grid[row+1][col+1] == 'M' && grid[row+1][col-1] == 'S' {
 		count += 1
 	}
 
 	// S.S
 	// .A.
 	// M.M
-	if grid[row-1][col-1] == byte('S') && grid[row-1][col+1] == byte('S') && grid[row+1][col+1] == byte('M') && grid[row+1][col-1] == byte('M') {
+	if grid[row-1][col-1] == 'S' && grid[row-1][col+1] == 'S' && grid[row+1][col+1] == 'M' && grid[row+1][col-1] == 'M' {
 		count += 1
 	}
 
 	// M.S
 	// .A.
 	// M.S
-	if grid[row-1][col-1] == byte('M') && grid[row-1][col+1] == byte('S') && grid[row+1][col+1] == byte('S') && grid[row+1][col-1] == byte('M') {
+	if grid[row-1][col-1] == 'M' && grid[row-1][col+1] == 'S' && grid[row+1][col+1] == 'S' && grid[row+1][col-1] == 'M' {
 		count += 1
 	}
 
