@@ -84,7 +84,55 @@ func checkForWord(grid []string, row int, col int) int {
 }
 
 func part2(lines []string) {
+	count := 0
 
+	for row := 0; row < len(lines); row++ {
+		for col, char := range lines[row] {
+			if char == 'A' {
+				count += checkForCross(lines, row, col)
+			}
+		}
+	}
+
+	fmt.Println(count)
+}
+
+func checkForCross(grid []string, row int, col int) int {
+	count := 0
+
+	if row < 1 || row > len(grid[0])-2 || col < 1 || col > len(grid[0])-2 {
+		return 0
+	}
+
+	// M.M
+	// .A.
+	// S.S
+	if grid[row-1][col-1] == byte('M') && grid[row-1][col+1] == byte('M') && grid[row+1][col+1] == 'S' && grid[row+1][col-1] == byte('S') {
+		count += 1
+	}
+
+	// S.M
+	// .A.
+	// S.M
+	if grid[row-1][col-1] == byte('S') && grid[row-1][col+1] == byte('M') && grid[row+1][col+1] == byte('M') && grid[row+1][col-1] == byte('S') {
+		count += 1
+	}
+
+	// S.S
+	// .A.
+	// M.M
+	if grid[row-1][col-1] == byte('S') && grid[row-1][col+1] == byte('S') && grid[row+1][col+1] == byte('M') && grid[row+1][col-1] == byte('M') {
+		count += 1
+	}
+
+	// M.S
+	// .A.
+	// M.S
+	if grid[row-1][col-1] == byte('M') && grid[row-1][col+1] == byte('S') && grid[row+1][col+1] == byte('S') && grid[row+1][col-1] == byte('M') {
+		count += 1
+	}
+
+	return count
 }
 
 func main() {
