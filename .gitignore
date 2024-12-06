@@ -24,4 +24,8 @@ go.work.sum
 # env file
 .env
 
+# My session_id for AoC
 session_id
+
+# Puzzle inputs
+*.txt
