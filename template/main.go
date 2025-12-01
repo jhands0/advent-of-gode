@@ -20,7 +20,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	lines, err := input.Strings(2024, 2)
+	lines, err := input.Strings(2025, 1)
 	if err != nil {
 		log.Fatal(err)
 	}
