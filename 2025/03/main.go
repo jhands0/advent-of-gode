@@ -1,13 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	aocutil "github.com/echojc/aocutil"
 )
 
 func part1(lines []string) {
+	total := 0
 
+	for _, bank := range lines {
+		batA := 0
+		batB := 0
+
+		for idx, r := range bank {
+			num := int(r - '0')
+
+			if num > batA && idx != len(bank)-1 {
+				batA = num
+				batB = 0
+			} else if num > batB {
+				batB = num
+			}
+		}
+		total += batA*10 + batB
+	}
+
+	fmt.Println(total)
 }
 
 func part2(lines []string) {
