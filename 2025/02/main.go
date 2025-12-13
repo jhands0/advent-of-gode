@@ -56,6 +56,61 @@ func part1(lines []string) {
 }
 
 func part2(lines []string) {
+	lines = strings.Split(lines[0], ",")
+	count := 0
+
+	for _, line := range lines {
+		s := strings.Split(line, "-")
+		lowerStr := s[0]
+		upperStr := s[1]
+
+		lower, _ := strconv.Atoi(lowerStr)
+		upper, _ := strconv.Atoi(upperStr)
+
+		lowerHalfStr := lowerStr[:len(lowerStr)/2]
+		upperHalfStr := upperStr[:(len(upperStr)+1)/2]
+		lowerHalf, _ := strconv.Atoi(lowerHalfStr)
+		upperHalf, _ := strconv.Atoi(upperHalfStr)
+
+		candidatesMap := make(map[int]int)
+
+		for i := lowerHalf; i <= upperHalf; i++ {
+			iStr := strconv.Itoa(i)
+			for j := 1; j <= len(iStr); j++ {
+				pattern := iStr[0:j]
+
+				candidateStr := strings.Repeat(pattern, len(upperStr))
+
+				if len(lowerStr)%len(pattern) == 0 && len(lowerStr) != 1 {
+					candidatesStr1 := candidateStr[:len(lowerStr)]
+					candidate, _ := strconv.Atoi(candidatesStr1)
+					if candidate >= lower && candidate <= upper {
+						candidatesMap[candidate] = 1
+					}
+					if candidate == 1 {
+						fmt.Println(1)
+					}
+				}
+
+				if len(upperStr)%len(pattern) == 0 {
+					candidateStr2 := candidateStr[:len(upperStr)]
+					candidate, _ := strconv.Atoi(candidateStr2)
+					if candidate >= lower && candidate <= upper {
+						candidatesMap[candidate] = 1
+					}
+					if candidate == 1 {
+						fmt.Println(1)
+					}
+				}
+			}
+		}
+
+		for c := range candidatesMap {
+			count += c
+		}
+	}
+
+	fmt.Println(count)
 
 }
 
