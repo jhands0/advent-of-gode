@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math"
 
 	aocutil "github.com/echojc/aocutil"
 )
@@ -31,7 +32,37 @@ func part1(lines []string) {
 }
 
 func part2(lines []string) {
+	total := 0
 
+	for _, bank := range lines {
+		batteries := [12]int{}
+		lenBat := len(batteries)
+		lenBank := len(bank)
+
+		for idx, r := range bank {
+			num := int(r - '0')
+			var start int
+			if start = lenBat - (lenBank - idx); start < 0 {
+				start = 0
+			}
+			for i := start; i < lenBat; i++ {
+				if num > batteries[i] {
+					batteries[i] = num
+					for j := i + 1; j < lenBat; j++ {
+						batteries[j] = 0
+					}
+					break
+				}
+			}
+		}
+
+		for i, c := range batteries {
+			mul := lenBat - i - 1
+			total += c * int(math.Pow10(mul))
+		}
+	}
+
+	println(total)
 }
 
 func main() {
