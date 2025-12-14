@@ -55,7 +55,62 @@ func part1(lines []string) {
 }
 
 func part2(lines []string) {
+	count := 0
+	var grid [][]rune
 
+	for _, line := range lines {
+		grid = append(grid, []rune(line))
+	}
+
+	lenX := len(grid)
+	lenY := len(grid[0])
+
+	again := true
+	for again {
+		paper_coords := make(map[[2]int]int)
+		for row := range grid {
+			for col, char := range grid[row] {
+
+				if char == '@' {
+					adj := 0
+
+					for i := -1; i <= 1; i++ {
+						newRow := row + i
+						if newRow < 0 || newRow > lenX-1 {
+							continue
+						}
+
+						for j := -1; j <= 1; j++ {
+							newCol := col + j
+							if i == 0 && j == 0 {
+								continue
+							}
+							if newCol < 0 || newCol > lenY-1 {
+								continue
+							}
+							if grid[newRow][newCol] == '@' {
+								adj++
+							}
+						}
+					}
+
+					if adj < 4 {
+						count++
+						paper_coords[[2]int{row, col}] = 1
+					}
+				}
+			}
+		}
+
+		if len(paper_coords) == 0 {
+			again = false
+		}
+		for k := range paper_coords {
+			grid[k[0]][k[1]] = '.'
+		}
+	}
+
+	fmt.Println(count)
 }
 
 func main() {
