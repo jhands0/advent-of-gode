@@ -30,8 +30,6 @@ func part1(lines []string) {
 		}
 	}
 
-	fmt.Print(grid)
-
 	fmt.Println(total)
 }
 
