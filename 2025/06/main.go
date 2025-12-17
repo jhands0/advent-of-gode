@@ -49,7 +49,51 @@ func part1(lines []string) {
 }
 
 func part2(lines []string) {
+	total := 0
+	var numbersStr [][]rune
+	var operators []string
 
+	for _, line := range lines {
+		if strings.Contains(line, "*") {
+			break
+		}
+		for idx, str := range []rune(line) {
+			if idx >= len(numbersStr) {
+				numbersStr = append(numbersStr, []rune{})
+			}
+			numbersStr[idx] = append(numbersStr[idx], str)
+		}
+	}
+	operators = append(operators, strings.Fields(lines[len(lines)-1])...)
+
+	var arr []int
+	index := 0
+
+	numbersStr = append(numbersStr, []rune(" "))
+	for _, rune := range numbersStr {
+		numStr := strings.TrimSpace(string(rune))
+		subtotal := 0
+		if numStr == "" {
+			switch operators[index] {
+			case "*":
+				subtotal = reduce(arr, func(acc, current int) int {
+					return acc * current
+				})
+			case "+":
+				subtotal = reduce(arr, func(acc, current int) int {
+					return acc + current
+				})
+			default:
+			}
+			arr = []int{}
+			index++
+			total += subtotal
+			continue
+		}
+		num, _ := strconv.Atoi(numStr)
+		arr = append(arr, num)
+	}
+	fmt.Println(total)
 }
 
 func reduce(arr []int, fn func(acc int, current int) int) int {
