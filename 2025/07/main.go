@@ -34,7 +34,39 @@ func part1(lines []string) {
 }
 
 func part2(lines []string) {
+	total := 0
+	grid := [][]rune{}
 
+	for _, line := range lines {
+		grid = append(grid, []rune(line))
+	}
+
+	dp := map[int]int{}
+	for i := range grid {
+		for j := range grid[i] {
+			if grid[i][j] == '^' && grid[i-1][j] == '|' {
+				grid[i+1][j-1] = '|'
+				grid[i+1][j+1] = '|'
+				if current, exists := dp[j]; exists {
+					dp[j-1] += current
+					dp[j+1] += current
+				}
+				dp[j] = 0
+			} else if grid[i][j] == '|' && i < len(grid)-1 && grid[i+1][j] == '.' {
+				grid[i+1][j] = '|'
+			} else if grid[i][j] == 'S' {
+				grid[i+1][j] = '|'
+				dp[j] = 1
+				break
+			}
+		}
+	}
+
+	for _, val := range dp {
+		total += val
+	}
+
+	fmt.Println(total)
 }
 
 func main() {
